@@ -1,6 +1,7 @@
 FROM java
 
-ADD . /home
-WORKDIR /home 
-ENTRYPOINT /home/java.sh
+ADD . /sh
+RUN mkdir /data
+WORKDIR /data
+ENTRYPOINT /sh/java.sh
 

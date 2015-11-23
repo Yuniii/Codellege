@@ -1,13 +1,11 @@
-echo $code > Main.java
-
-if [ -f "Main.java" ]
+if [ -f "/data/Main.java" ]
 then
-    javac Main.java
+    javac /data/Main.java
 else
     echo "檔案寫入失敗！"
 fi
 
-if [ -f "Main.class" ]
+if [ -f "/data/Main.class" ]
 then
     java Main
 else
