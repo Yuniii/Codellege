@@ -26,7 +26,12 @@ app.use(cors());
 
 app.post('/', function (req, res) {
     var id = shortID.generate();
-    var className = 'Main',
+    // GET CLASS NAME
+    var code = req.body.code;
+    code = code.replace(/ /g, '');
+    var getName = code.match("class(.*){p");
+
+    var className = getName[1],
         path = __dirname + '/' + id + '/',
         javaFile = path + className + '.java',
 	classFile = path + className + '.class';
@@ -39,7 +44,7 @@ app.post('/', function (req, res) {
     }
     fs.writeFileSync(javaFile, req.body.code);
 
-    exec('docker run --name=' + id + ' -v ' + path + ':/home derrickh/codellege:mount2', function (err, stdout, stderr) {
+    exec('docker run --name=' + id + ' -e "name=' + className + '" -v ' + path + ':/home derrickh/codellege:mount3', function (err, stdout, stderr) {
 	res.send(stdout);
     });
     // REMOVE CONTAINER AFTER ONE MINUTE
