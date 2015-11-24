@@ -39,7 +39,7 @@ app.post('/', function (req, res) {
     }
     fs.writeFileSync(javaFile, req.body.code);
 
-    exec('docker run --name=' + id + ' -v ' + path + ':/data derrickh/codellege:mount', function (err, stdout, stderr) {
+    exec('docker run --name=' + id + ' -v ' + path + ':/home derrickh/codellege:mount2', function (err, stdout, stderr) {
 	res.send(stdout);
     });
     // REMOVE CONTAINER AFTER ONE MINUTE
