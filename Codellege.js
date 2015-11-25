@@ -48,14 +48,7 @@ app.post('/', function (req, res) {
 	    exec('docker rm ' + id);	
 	});
 	// REMOVE USER'S CODE ON THE SERVER
-	fs.unlinkSync(javaFile);
-        if (fs.existsSync(javaFile)) {
-	    fs.unlinkSync(javaFile);
-	}
-	if (fs.existsSync(classFile)) {
-	    fs.unlinkSync(classFile);
-	}
-	fs.rmdirSync(path);
+	exec('rm -rf ' + path);
     }, 60000);
 });
 
