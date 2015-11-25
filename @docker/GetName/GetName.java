@@ -29,9 +29,7 @@ public class GetName {
 					name = name2;
 				}
 				break;
-            } else {
-				name = "Main";		
-			}
+            }
         }
         fr1.close();
 
