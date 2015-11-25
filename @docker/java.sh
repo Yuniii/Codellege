@@ -4,7 +4,7 @@ java GetName *.java
 
 if [ -f "/data/$(cat name).java" ]
 then
-    javac $(cat name).java
+    javac $(cat name).java 2> log
 else
     echo "檔案寫入失敗！"
 fi
@@ -14,4 +14,5 @@ then
     java $(cat name)
 else
     echo "編譯失敗"
+    echo $(cat log)
 fi
