@@ -29,7 +29,7 @@ app.post('/', function (req, res) {
     // GET CLASS NAME
     var code = req.body.code;
     code = code.replace(/ /g, '');
-    var getName = code.match("class(.*){p");
+    var getName = code.match("publicclass(.*){public");
 
     var className = getName[1],
         path = __dirname + '/' + id + '/',
