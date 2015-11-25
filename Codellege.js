@@ -26,8 +26,7 @@ app.use(cors());
 
 app.post('/', function (req, res) {
     var id = shortID.generate();
-    // GET CLASS NAME
-    var className = req.body.code.split('public class ')[1].split('{')[0].trim(),
+    var className = 'Main',
         path = __dirname + '/' + id + '/',
         javaFile = path + className + '.java',
 	classFile = path + className + '.class';
@@ -39,9 +38,8 @@ app.post('/', function (req, res) {
         fs.unlinkSync(javaFile);
     }
     fs.writeFileSync(javaFile, req.body.code);
-    
-    console.log(className);
-    exec('docker run --name=' + id + ' -e "name=' + className + '" -v ' + path + ':/home derrickh/codellege:mount4', function (err, stdout, stderr) {
+
+    exec('docker run --name=' + id + ' -v ' + path + ':/home derrickh/codellege:mount2', function (err, stdout, stderr) {
 	res.send(stdout);
     });
     // REMOVE CONTAINER AFTER ONE MINUTE
