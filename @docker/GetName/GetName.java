@@ -23,10 +23,10 @@ public class GetName {
 				if (m2.find()) {
 				  name2 = m2.group(1);
 				}
-				if (name1.length() > name2.length()) {
-					name = name2;
-				} else {
+				if (name1.length() < name2.length() && name1.length() != 0) {
 					name = name1;
+				} else {
+					name = name2;
 				}
 				break;
             } else {
