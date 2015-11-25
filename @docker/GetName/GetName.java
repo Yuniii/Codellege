@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 public class GetName {
     public static void main(String[] args) throws IOException {
-		String name = "";		
+		String name = "", name1 = "", name2 = "";		
 		FileReader fr1 = new FileReader(args[0]);
         BufferedReader br1 = new BufferedReader(fr1);
 		while (br1.ready()) {
@@ -13,10 +13,20 @@ public class GetName {
             line = br1.readLine();
 			// get the class name
             if (line.contains("public class ")) {
-				Pattern p = Pattern.compile("class\\s+(.*?)\\s+\\{");
-				Matcher m = p.matcher(line);
-				if (m.find()) {
-				  name = m.group(1);
+				Pattern p1 = Pattern.compile("class\\s+(.*?)\\s+\\{");
+				Pattern p2 = Pattern.compile("class\\s+(.*?)\\{");
+				Matcher m1 = p1.matcher(line);
+				Matcher m2 = p2.matcher(line);
+				if (m1.find()) {
+				  name1 = m1.group(1);
+				}
+				if (m2.find()) {
+				  name2 = m2.group(1);
+				}
+				if (name1.length() > name2.length()) {
+					name = name2;
+				} else {
+					name = name1;
 				}
 				break;
             } else {
