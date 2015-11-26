@@ -30,7 +30,8 @@ app.post('/', function (req, res) {
     var className = req.body.code.split('public class ')[1].split('{')[0].trim(),
         path = __dirname + '/' + id + '/',
         javaFile = path + className + '.java',
-	classFile = path + className + '.class';
+	classFile = path + className + '.class',
+	inputFile = path + 'input';
 
     if ( ! fs.existsSync(path)) {
         fs.mkdirSync(path);
@@ -39,8 +40,9 @@ app.post('/', function (req, res) {
         fs.unlinkSync(javaFile);
     }
     fs.writeFileSync(javaFile, req.body.code);
+    fs.writeFileSync(inputFile, req.body.input);
 
-    exec('docker run --name=' + id + ' -v ' + path + ':/home derrickh/codellege:mount2', function (err, stdout, stderr) {
+    exec('docker run --name=' + id + ' -v ' + path + ':/home derrickh/codellege:mount3', function (err, stdout, stderr) {
 	res.send(stdout);
     });
     // REMOVE CONTAINER AFTER ONE MINUTE

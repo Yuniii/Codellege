@@ -1,4 +1,5 @@
 cp /home/*.java /data
+cp /home/input /data
 mv /app/GetName.class /data
 java GetName *.java
 
@@ -11,7 +12,7 @@ fi
 
 if [ -f "/data/$(cat name).class" ]
 then
-    java $(cat name)
+    java $(cat name) < input
 else
     echo "編譯失敗"
     echo $(cat log)
