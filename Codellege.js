@@ -27,7 +27,7 @@ app.use(cors());
 app.post('/', function (req, res) {
     var id = shortID.generate();
 
-    var className = req.body.code.split('public class ')[1].split('{')[0].trim(),
+    var className = req.body.code.split('class ')[1].split('{')[0].trim(),
         path = __dirname + '/' + id + '/',
         javaFile = path + className + '.java',
 	classFile = path + className + '.class',

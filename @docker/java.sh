@@ -7,7 +7,7 @@ if [ -f "/data/$(cat name).java" ]
 then
     javac $(cat name).java 2> log
 else
-    echo "檔案寫入失敗！"
+    echo "檔案寫入失敗"
 fi
 
 if [ -f "/data/$(cat name).class" ]
@@ -15,5 +15,10 @@ then
     java $(cat name) < input
 else
     echo "編譯失敗"
-    echo $(cat log)
+    if [ -f "/data/log" ]
+    then
+	echo $(cat log)
+    else
+	echo "程式中請包含一個 public class"
+    fi
 fi
