@@ -45,14 +45,14 @@ app.post('/', function (req, res) {
     exec('docker run --name=' + id + ' -v ' + path + ':/home derrickh/codellege:mount3', function (err, stdout, stderr) {
 	res.send(stdout);
     });
-    // REMOVE CONTAINER AFTER ONE MINUTE
+    // REMOVE CONTAINER AFTER 10 SECONDS
     setTimeout(function() {
         exec('docker stop ' + id, function() {
 	    exec('docker rm ' + id);	
 	});
 	// REMOVE USER'S CODE ON THE SERVER
 	exec('rm -rf ' + path);
-    }, 60000);
+    }, 10000);
 });
 
 console.log('port: ' + port);
